@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import { AppBar, Toolbar } from '@material-ui/core';
 
-import firebase from './services/firebase';
+import firebase from '../../services/firebase';
+
+import RoomsList from '../../components/RoomsList';
+
+import {
+  Container
+} from './style';
 
 function App() {
   const [rooms, setRooms] = useState([]);
-  // const [room, setRoom] = useState('')
+  const [room, setRoom] = useState({});
   // const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -52,16 +59,15 @@ function App() {
     firebase.db.child('roomsMessages').child(roomRef.key).push({user: 'admin', message: 'initial'});
   }
 
+  const selectRoom = (selectedRoom) => setRoom(selectedRoom);
 
   return (
-    <div className="App">
-      <button onClick={() => createRoom('teste')}>Create</button>
-      {
-        rooms.map((room) => (
-          <p key={room.id}>{room.name}</p>
-        ))
-      }
-    </div>
+    <Container>
+      <AppBar position="sticky">
+        <Toolbar variant="dense" />
+      </AppBar>
+      <RoomsList rooms={rooms} />
+    </Container>
   );
 }
 

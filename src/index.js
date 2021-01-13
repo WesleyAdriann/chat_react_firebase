@@ -1,10 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import { StylesProvider } from '@material-ui/core/styles';
+
+import App from './views/App';
+
+import GlobalStyle from './styles/GlobalStyle';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <StylesProvider injectFirst>
+      <GlobalStyle />
+      <App />
+    </StylesProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
